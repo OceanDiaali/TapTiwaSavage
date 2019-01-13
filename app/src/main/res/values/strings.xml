@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tap Tiwa</string>
+    <string name="app_about">About</string>
+    <string name="app_help">Help</string>
+    <string name="start_text">Tap to play</string>
+    <string name="timer_label">20</string>
+    <string name="score_label">score:0</string>
+    <string name="hiscore_label">hiScore:0</string>
+</resources>

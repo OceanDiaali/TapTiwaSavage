@@ -6,4 +6,5 @@
     <string name="timer_label">20</string>
     <string name="score_label">score:0</string>
     <string name="hiscore_label">hiScore:0</string>
+    <string name="time_up">Time Up!</string>
 </resources>

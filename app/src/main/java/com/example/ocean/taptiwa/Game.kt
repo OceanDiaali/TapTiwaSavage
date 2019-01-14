@@ -12,9 +12,11 @@ import kotlinx.android.synthetic.main.activity_game.*
 
 class Game : AppCompatActivity() {
 
-    var imageArray: ArrayList<ImageView> = ArrayList<ImageView>()
+    var imageArray = ArrayList<ImageView>()
     var scoreCount: Int = 0
     var hiScore: Int = 0
+
+    var bgMusic: MediaPlayer? = MediaPlayer()
 
     var handler: Handler = Handler()
     var runnable: Runnable = Runnable {  }
@@ -22,6 +24,9 @@ class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
+        bgMusic = MediaPlayer.create(applicationContext, R.raw.bg_music)
+        bgMusic?.start()
 
         imageArray = arrayListOf( tiwa1, tiwa2, tiwa3, tiwa4, tiwa5, tiwa6, tiwa7, tiwa8, tiwa9)
 
@@ -43,12 +48,10 @@ class Game : AppCompatActivity() {
                     image.visibility = View.INVISIBLE
                 }
 
-
-
-                var rnd = (0..8).random()
+                val rnd = (0..8).random()
                 imageArray[rnd].visibility = View.VISIBLE
 
-                handler.postDelayed(runnable, 2000)
+                handler.postDelayed(runnable, 1000)
             }
         }
             handler.post(runnable)
@@ -63,13 +66,16 @@ class Game : AppCompatActivity() {
 
             override fun onFinish() {
                 timer_view.text = "Time!"
+
+                bgMusic?.stop()
+
                 if (scoreCount > hiScore) {
                     hiScore = scoreCount
                     hiscore_view.text = "hiScore:$hiScore"
                 }
                 handler.removeCallbacks(runnable) // to stop taps ability
+
                 // remove images, so no more tapping
-                timer_view.text = "Game Over!"
                 for (image in imageArray) {
                     image.visibility = View.INVISIBLE
                 } //for loop
